@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from genres.views import (
     GenreListCreateAPIView,
     GenreRetrieveUpdateDestroyAPIView,
@@ -19,4 +19,6 @@ urlpatterns = [
         GenreRetrieveUpdateDestroyAPIView.as_view(),
         name='genre-detail'
         ),
+    
+    path('api/v1/actors/', include('actors.urls')),
 ]

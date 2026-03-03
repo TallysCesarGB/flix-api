@@ -13,7 +13,7 @@ class MovieSerializer(serializers.ModelSerializer):
     def get_rate(self, obj):
         ratings = obj.reviews.all()
         if ratings.exists():
-            return round(ratings.aggregate(average=Avg('rating'))['average'], 1)
+            return round(ratings.aggregate(average=Avg('rating'))['rating__avg'], 1)
         return None
 
     def validate_release_date(self, value):

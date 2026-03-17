@@ -1,4 +1,5 @@
 import requests
+from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from rest_framework.generics import (
     ListCreateAPIView,
@@ -23,10 +24,12 @@ def nationality_autocomplete(request):
 
 
 class ActorListCreateAPIView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
 
 class ActorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer

@@ -7,6 +7,7 @@ from rest_framework.generics import (
     )
 from .models import Actor
 from .serializers import ActorSerializer
+from core.permissions import GlobalDefultPermissionClass
 
 
 def nationality_autocomplete(request):
@@ -24,12 +25,12 @@ def nationality_autocomplete(request):
 
 
 class ActorListCreateAPIView(ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefultPermissionClass)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
 
 class ActorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefultPermissionClass)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer

@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     MovieListCreateAPIView,
-    MovieRetrieveUpdateDestroyAPIView
+    MovieRetrieveUpdateDestroyAPIView,
+    MovieStatsAPIView
 )
 
 
@@ -15,5 +16,10 @@ urlpatterns = [
         '<int:pk>/',
         MovieRetrieveUpdateDestroyAPIView.as_view(),
         name='movie-detail'
+        ),
+    path(
+        'stats/',
+        MovieStatsAPIView.as_view(),
+        name='movie-stats'
         ),
 ]

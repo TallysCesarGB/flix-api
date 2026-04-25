@@ -7,19 +7,30 @@ from rest_framework import views, response, status
 from rest_framework.permissions import IsAuthenticated
 from .models import Movie
 from reviews.models import Review
-from .serializers import MovieSerializer
+from .serializers import (
+    MovieSerializer,
+    MovieListDetailSerializer
+)
 from core.permissions import GlobalDefultPermissionClass
 
 class MovieListCreateAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefultPermissionClass)
     queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MovieListDetailSerializer
+        return MovieSerializer
 
 
 class MovieRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefultPermissionClass)
     queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MovieListDetailSerializer
+        return MovieSerializer
 
 
 class MovieStatsAPIView(views.APIView):
